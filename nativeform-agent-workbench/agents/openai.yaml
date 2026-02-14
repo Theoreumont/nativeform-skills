@@ -1,0 +1,4 @@
+version: 1
+name: nativeform-agent-workbench
+description: NativeForm CLI-first skill with API fallback for public fill and management workflows.
+entrypoint: SKILL.md

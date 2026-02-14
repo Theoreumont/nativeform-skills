@@ -1,84 +1,22 @@
-# NativeForm Contracts (Agent Skill)
+# NativeForm Public Guidance Rules
 
-## Build order
+This file defines what this public skill should and should not include.
 
-1. HTTP API (canonical)
-2. CLI wrapper
-3. MCP extension
-4. Skill orchestration layer
+## Include
 
-## Public agent-fill endpoints
+- Beginner-friendly help for using `nativeform.app`.
+- Practical steps users can follow immediately.
+- Clear troubleshooting for common user mistakes.
 
-- `GET /api/public/forms/{slug}/ai-manifest`
-- `POST /api/public/forms/{slug}/drafts`
-- `POST /api/public/forms/{slug}/submissions`
-- `GET /api/public/confirm/{token}`
-- `POST /api/public/confirm/{token}`
+## Exclude
 
-## Manifest required keys
+- Internal architecture details.
+- Internal testing strategy details.
+- Internal repository paths or private system notes.
+- Any secret, token, private key, or private identifier.
 
-- `manifestVersion`
-- `generatedAt`
-- `form`
-- `instructions`
-- `fields`
-- `submission`
-- `rateLimits`
-- `examples`
+## Communication style
 
-Each `fields[]` entry must include `type`, `required`, `options` when relevant, and `validation`.
-
-## Instructions mapping
-
-- `instructions.agentInstructions` <- `form.aiInstructions`
-- `instructions.humanInstructions` <- `form.instructions`
-- `instructions.context` <- `form.context`
-
-## Agent identity headers
-
-- Required: `x-nativeform-agent`
-- Optional: `x-nativeform-agent-version`
-- Optional: `x-nativeform-agent-channel`
-- Recommended: aligned `User-Agent`
-
-## Auth modes for management APIs
-
-- API key header: `x-nativeform-api-key`
-- OAuth header: `Authorization: Bearer <token>`
-
-## Rate-limit contract
-
-Always expect/emit:
-
-- `X-RateLimit-Limit`
-- `X-RateLimit-Remaining`
-- `X-RateLimit-Reset`
-- `Retry-After` on `429`
-
-## Error contract
-
-```json
-{
-  "error": {
-    "code": "VALIDATION_ERROR",
-    "message": "Human-readable error",
-    "fieldErrors": {
-      "email": ["Invalid email"]
-    },
-    "hint": "Actionable next step",
-    "docs_url": "https://www.nativeform.app/docs/..."
-  }
-}
-```
-
-## Locked v1 scope names
-
-API key scopes use `nf.<resource>.<action>`.
-OAuth scopes use `nativeform.<resource>.<action>`.
-
-Minimum set:
-
-- Forms: `read`, `write`, `publish`
-- Responses: `read`, `delete`, `process`
-- Webhooks: `read`, `write`, `test`
-- Keys: `read`, `create`, `revoke`, `rotate`
+- Keep instructions short.
+- Use plain language.
+- Prefer checklists and examples over technical jargon.

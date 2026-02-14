@@ -1,45 +1,46 @@
-# NativeForm Agent Workflows
+# NativeForm Usage Workflows
 
-## Workflow A: Public form fill
+## Workflow A: Help a user create a form
 
-1. Read manifest from `GET /api/public/forms/{slug}/ai-manifest`.
-2. Validate answers against field types and validation constraints.
-3. Submit draft to `POST /api/public/forms/{slug}/drafts` when iterative collection is needed.
-4. Submit final payload to `POST /api/public/forms/{slug}/submissions`.
-5. If confirmation is required, present tokenized confirm flow:
-   - `GET /api/public/confirm/{token}`
-   - `POST /api/public/confirm/{token}`
+1. Ask what they want to collect.
+2. Suggest a simple form title and short description.
+3. Recommend required fields only for essential data.
+4. Ask them to publish the form when ready.
 
-Done when:
+Success looks like:
 
-- HTTP status is `201`.
-- Response includes `responseId`.
-- Validation failures are surfaced as typed field errors.
+- The form is published.
+- The user has a shareable link.
 
-## Workflow B: Management actions with parity discipline
+## Workflow B: Help a user share a form
 
-For any requested action (publish, pause, responses, webhooks, keys, fields):
+1. Ask where they want to share (email, social, team chat, website).
+2. Give a ready-to-copy message with the form link.
+3. Remind them to mention estimated completion time.
 
-1. Check the API endpoint contract.
-2. Prefer the equivalent `nativeform` CLI command.
-3. Confirm matching MCP tool exists for parity.
-4. Confirm parity test exists in `tests/parity`.
+Success looks like:
 
-Done when:
+- Respondents can open the link and submit successfully.
 
-- API + CLI + MCP + parity test all align.
+## Workflow C: Help a user improve response quality
 
-## Workflow C: Robust retries and support output
+1. Review confusing questions.
+2. Rewrite labels with plain language.
+3. Add one short example for tricky fields.
+4. Remove unnecessary required fields.
 
-1. Parse normalized error body.
-2. On `422`, return exact field-level fixes.
-3. On `429`, apply backoff using `Retry-After`.
-4. On auth errors, call out missing or invalid scope.
-5. Always provide next action in plain language.
+Success looks like:
 
-## Workflow D: Agent attribution and analytics hygiene
+- Fewer incomplete responses.
+- Fewer follow-up messages from respondents.
 
-1. Send `x-nativeform-agent` on agent requests.
-2. Include version/channel headers when available.
-3. Preserve server-side attribution (`source=agent`, agent metadata).
-4. Record transport context (`api`, `cli`, `mcp`, `skill`) in logs and reporting.
+## Workflow D: Basic troubleshooting
+
+1. Check if the form is published.
+2. Check if the link is correct.
+3. Check if required fields are too strict.
+4. Ask for exact error text if issue continues.
+
+Success looks like:
+
+- The user can submit or receive submissions without blockers.

@@ -1,99 +1,76 @@
 ---
 name: nativeform-agent-workbench
-description: Runs NativeForm agent workflows using CLI-first execution with API fallback, including public form fill, management operations, parity checks, and normalized error handling. Use when users ask to operate NativeForm via agents, MCP, CLI, or installable skill flows.
+description: Helps users operate NativeForm from nativeform.app with clear, beginner-friendly steps for creating forms, sharing forms, collecting responses, and basic troubleshooting. Use when users ask how to use NativeForm in practical day-to-day workflows.
 metadata:
-  tags: nativeform, agent, cli, mcp, api, forms
+  tags: nativeform, forms, onboarding, usage
 ---
 
 # NativeForm Agent Workbench
 
 ## When to use
 
-Use this skill when the task is about NativeForm agent operations, especially:
+Use this skill for product usage help on `nativeform.app`, especially when the user wants to:
 
-- Running form management from agent tooling.
-- Executing public AI form-fill flows.
-- Keeping API, CLI, MCP, and parity behavior aligned.
-- Preparing workflows for Codex and `skills` ecosystem installs.
+- Create a form quickly.
+- Share a public form link.
+- Collect and review submissions.
+- Update form instructions and settings.
+- Understand common mistakes and fix them.
 
-## Execution policy
+## Response style
 
-Always use this order:
+- Explain steps in very simple language.
+- Keep each step short and actionable.
+- Ask for missing info only when strictly needed.
+- Prefer practical examples over technical explanations.
 
-1. CLI (`nativeform ...`) when available.
-2. HTTP API endpoint fallback when CLI is not available.
-3. Confirm-link fallback for constrained environments.
+## Core playbooks
 
-Do not invent hidden/private behavior. Use documented contracts only.
+### 1) Create and publish a form
 
-## Required request identity
+1. Go to `https://nativeform.app`.
+2. Create a new form.
+3. Add a clear title and instructions.
+4. Add required fields first (name, email, essentials).
+5. Publish the form.
 
-For agent-originated HTTP calls, include:
+### 2) Share a form
 
-- `x-nativeform-agent: <agent-name>` (required)
-- `x-nativeform-agent-version: <version>` (optional)
-- `x-nativeform-agent-channel: api|cli|mcp|skill|other` (optional)
-- `User-Agent` aligned with agent name/version (recommended)
+1. Copy the public form URL from `nativeform.app`.
+2. Share that link directly with respondents.
+3. If needed, explain what information users should prepare before opening the form.
 
-For management APIs, use one auth mode:
+### 3) Review and process responses
 
-- `x-nativeform-api-key: <key>`
-- `Authorization: Bearer <token>`
+1. Open the form dashboard in `nativeform.app`.
+2. Go to Responses.
+3. Filter or scan new submissions.
+4. Follow up with respondents for missing critical information.
 
-## Core workflows
+### 4) Improve completion quality
 
-### 1) Public agent fill
+1. Make labels explicit and beginner-friendly.
+2. Keep instructions short and concrete.
+3. Mark only truly necessary fields as required.
+4. Add examples for fields that are often filled incorrectly.
 
-1. Fetch manifest: `GET /api/public/forms/{slug}/ai-manifest`.
-2. Build answers from `fields[]` + `validation`.
-3. Optionally create draft: `POST /api/public/forms/{slug}/drafts`.
-4. Submit: `POST /api/public/forms/{slug}/submissions`.
-5. If confirmation required, guide user through `/api/public/confirm/{token}`.
+## Troubleshooting guide
 
-Success target: `201` with `responseId`.
+If a user says "it does not work", use this checklist:
 
-Validation target: `422` with typed `fieldErrors`.
+1. Confirm the form is published.
+2. Confirm the shared URL is correct.
+3. Confirm required fields are not overly strict.
+4. Confirm the user is not blocked by browser extensions or stale cache.
+5. Ask for the exact error message and step where it happened.
 
-### 2) Form management parity
+## Boundaries
 
-For each action, confirm parity mapping exists:
-
-- Web action
-- API endpoint
-- CLI command
-- MCP tool
-- Parity test
-
-Treat parity as complete only when all five exist.
-
-### 3) Error handling and retries
-
-Expect normalized error body:
-
-- `error.code`
-- `error.message`
-- `error.fieldErrors` (when validation related)
-- `error.hint`
-- `error.docs_url`
-
-On `429`, respect `Retry-After` and rate-limit headers.
-
-## Safety and guardrails
-
-- Never include secrets in docs, examples, or committed output.
-- Never bypass scope checks.
-- Never change business logic in the skill itself; orchestrate existing surfaces.
-- Keep output explicit and beginner-friendly.
-
-## Success checklist
-
-- Uses documented endpoint contracts.
-- Applies required agent identity headers.
-- Returns actionable remediation when failing.
-- Preserves CLI-first/API-fallback behavior.
+- Do not expose secrets or private configuration.
+- Do not provide internal implementation details.
+- Keep guidance focused on how to use `nativeform.app`.
 
 ## References
 
-- [references/contracts.md](references/contracts.md)
 - [references/workflows.md](references/workflows.md)
 - [references/install-and-release.md](references/install-and-release.md)

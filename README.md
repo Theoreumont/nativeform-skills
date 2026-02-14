@@ -1,6 +1,6 @@
 # NativeForm Skills
 
-Public installable skills for NativeForm agent workflows.
+Public installable skills for using `nativeform.app`.
 
 ## Install
 
@@ -11,3 +11,5 @@ npx skills add https://github.com/theoreumont/nativeform-skills --skill nativefo
 ## Included skills
 
 - `nativeform-agent-workbench`
+
+This skill is intentionally user-facing and does not include internal system details.

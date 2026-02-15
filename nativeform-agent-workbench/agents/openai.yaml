@@ -1,4 +1,4 @@
 version: 1
 name: nativeform-agent-workbench
-description: Beginner-friendly NativeForm usage guidance for nativeform.app.
+description: NativeForm playbook for UI, API, CLI, and MCP workflows (public agent fill, management, responses, webhooks).
 entrypoint: SKILL.md

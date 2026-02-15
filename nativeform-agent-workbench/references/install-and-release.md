@@ -2,7 +2,7 @@
 
 ## Goal
 
-Keep this skill easy to install and safe to share publicly.
+Keep this skill easy to install and safe to share publicly while documenting NativeForm's public integration surfaces (API, CLI, MCP).
 
 ## Public repository
 
@@ -30,7 +30,8 @@ After install, restart the agent client to reload the skill catalog.
 ## Release checklist
 
 - Confirm frontmatter has `name` and `description`.
-- Keep `SKILL.md` focused on user-facing usage of `nativeform.app`.
-- Keep language beginner-friendly and practical.
-- Do not include internal stack or system details.
-- Do not include secrets or private IDs.
+- Keep `SKILL.md` short and "routing-focused" (how to pick the right surface).
+- Put long reference material under `references/` and link to it from `SKILL.md`.
+- Do not include internal repository paths, internal architecture notes, or private system identifiers.
+- Do not include secrets. Use placeholders like `$NATIVEFORM_API_KEY` and `<token>`.
+- Treat signing secrets as "shown once" values and warn users to store them securely.

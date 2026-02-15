@@ -1,76 +1,44 @@
 ---
 name: nativeform-agent-workbench
-description: Helps users operate NativeForm from nativeform.app with clear, beginner-friendly steps for creating forms, sharing forms, collecting responses, and basic troubleshooting. Use when users ask how to use NativeForm in practical day-to-day workflows.
+description: Markdown mirror of the NativeForm developer hub. Guides NativeForm usage across nativeform.app, HTTP APIs, the nativeform CLI, and the hosted MCP server (including public agent-fill and agent integrations).
 metadata:
-  tags: nativeform, forms, onboarding, usage
+  tags: nativeform, agent, api, cli, mcp, forms, webhooks
 ---
 
 # NativeForm Agent Workbench
 
-## When to use
+This skill is a markdown mirror of the NativeForm developer hub (`https://www.nativeform.app/docs`).
 
-Use this skill for product usage help on `nativeform.app`, especially when the user wants to:
+Use it when the user asks about NativeForm APIs, CLI, MCP, agent integrations, or embedding patterns.
 
-- Create a form quickly.
-- Share a public form link.
-- Collect and review submissions.
-- Update form instructions and settings.
-- Understand common mistakes and fix them.
+## Quickstart
 
-## Response style
+- [Quickstart](references/hub/quickstart.md)
+- [Get an API Key](references/hub/get-api-key.md)
+- [Form](references/hub/form.md)
+- [Read Responses](references/hub/read-responses.md)
+- [Submit Responses](references/hub/submit-responses.md)
 
-- Explain steps in very simple language.
-- Keep each step short and actionable.
-- Ask for missing info only when strictly needed.
-- Prefer practical examples over technical explanations.
+## Guides
 
-## Core playbooks
+- [Create feedback widget](references/hub/create-feedback-widget.md)
+- [Agent discovery](references/hub/agent-discovery.md)
 
-### 1) Create and publish a form
+## Agents
 
-1. Go to `https://nativeform.app`.
-2. Create a new form.
-3. Add a clear title and instructions.
-4. Add required fields first (name, email, essentials).
-5. Publish the form.
+- [Agents Overview](references/hub/agents-overview.md)
+- [Agents Auth](references/hub/agents-auth.md)
+- [Public Fill](references/hub/public-fill.md)
+- [Agents CLI](references/hub/agents-cli.md)
+- [Agents MCP](references/hub/agents-mcp.md)
+- [Agents Skills](references/hub/agents-skills.md)
 
-### 2) Share a form
+## CLI Deep Dive
 
-1. Copy the public form URL from `nativeform.app`.
-2. Share that link directly with respondents.
-3. If needed, explain what information users should prepare before opening the form.
+- [nativeform CLI deep dive](references/hub/cli-deepdive.md)
 
-### 3) Review and process responses
+## Supporting References
 
-1. Open the form dashboard in `nativeform.app`.
-2. Go to Responses.
-3. Filter or scan new submissions.
-4. Follow up with respondents for missing critical information.
-
-### 4) Improve completion quality
-
-1. Make labels explicit and beginner-friendly.
-2. Keep instructions short and concrete.
-3. Mark only truly necessary fields as required.
-4. Add examples for fields that are often filled incorrectly.
-
-## Troubleshooting guide
-
-If a user says "it does not work", use this checklist:
-
-1. Confirm the form is published.
-2. Confirm the shared URL is correct.
-3. Confirm required fields are not overly strict.
-4. Confirm the user is not blocked by browser extensions or stale cache.
-5. Ask for the exact error message and step where it happened.
-
-## Boundaries
-
-- Do not expose secrets or private configuration.
-- Do not provide internal implementation details.
-- Keep guidance focused on how to use `nativeform.app`.
-
-## References
-
-- [references/workflows.md](references/workflows.md)
-- [references/install-and-release.md](references/install-and-release.md)
+- [Capabilities map (API / CLI / MCP)](references/capabilities.md)
+- [Contracts (API / CLI / MCP)](references/contracts.md)
+- [Workflows (API / CLI / MCP)](references/workflows.md)
